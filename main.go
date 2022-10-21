@@ -36,9 +36,7 @@ func getByUID(ctx *gin.Context) {
 }
 
 func main() {
-	order_service := service.NewOrderService()
-
-	o_service = order_service
+	o_service = service.NewOrderService()
 
 	router := gin.Default()
 	// load html and static files..
@@ -51,7 +49,7 @@ func main() {
 	})
 	router.GET("/wb/get/", getByUID)
 
-	go subscriber.Subscribe(order_service)
+	go subscriber.Subscribe(o_service)
 	go publisher.Publish()
 
 	router.Run(":8000")
