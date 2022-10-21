@@ -43,7 +43,7 @@ func main() {
 	router := gin.Default()
 	// load html and static files..
 	router.LoadHTMLFiles("web/html/index.html")
-	router.Static("web/css", "web/css")
+	router.Static("/css", "web/css")
 	router.GET("/wb/", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "index.html", gin.H{
 			"title": "main page",

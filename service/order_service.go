@@ -15,7 +15,7 @@ type OrderService struct {
 }
 
 func initConnectionPool() *pgxpool.Pool {
-	connectionStr := fmt.Sprintf("postgresql://%s:%s@%s/%s", configs.Name, configs.Pass, configs.Host, configs.Name)
+	connectionStr := fmt.Sprintf("postgresql://%s:%s@%s/%s", configs.User, configs.Pass, configs.Host, configs.Name)
 	pool, err := pgxpool.New(context.Background(), connectionStr)
 
 	if err != nil {
