@@ -1,16 +1,16 @@
-package main
+package subscriber
 
 import (
 	"encoding/json"
 	"fmt"
 	"sync"
 	"wb_l0/domain"
-	"wb_l0/repository"
+	"wb_l0/service"
 
 	"github.com/nats-io/stan.go"
 )
 
-func Subscribe(r *repository.OrderRepo) {
+func Subscribe(o_service *service.OrderService) {
 	sub, err := stan.Connect("wb_l0", "sub")
 
 	if err != nil {
@@ -27,7 +27,7 @@ func Subscribe(r *repository.OrderRepo) {
 			fmt.Printf("ERROR: can't unmarshal json with new order in subscriber: %v\n", err)
 			return
 		}
-		r.AddOrder(&new_order)
+		o_service.AddOrder(&new_order)
 	})
 
 	w := sync.WaitGroup{}
